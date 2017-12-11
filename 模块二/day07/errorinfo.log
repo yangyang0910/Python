@@ -1,0 +1,10 @@
+12/11/2017 08:28:06 PM  30 WARNING E:/Python/模块二/day07/logs.py logs.py logs <module> 8 
+12/11/2017 08:28:06 PM  20 INFO E:/Python/模块二/day07/logs.py logs.py logs <module> 9 
+12/11/2017 08:28:06 PM  10 DEBUG E:/Python/模块二/day07/logs.py logs.py logs <module> 10 
+12/11/2017 08:28:06 PM  40 ERROR E:/Python/模块二/day07/logs.py logs.py logs <module> 11 
+12/11/2017 08:28:06 PM  50 CRITICAL E:/Python/模块二/day07/logs.py logs.py logs <module> 12 
+2017-11-12 08:30:07 PM  30 WARNING E:/Python/模块二/day07/logs.py logs.py logs <module> 11 
+2017-11-12 08:30:07 PM  20 INFO E:/Python/模块二/day07/logs.py logs.py logs <module> 12 
+2017-11-12 08:30:07 PM  10 DEBUG E:/Python/模块二/day07/logs.py logs.py logs <module> 13 
+2017-11-12 08:30:07 PM  40 ERROR E:/Python/模块二/day07/logs.py logs.py logs <module> 14 
+2017-11-12 08:30:07 PM  50 CRITICAL E:/Python/模块二/day07/logs.py logs.py logs <module> 15 
