@@ -10,3 +10,7 @@
 2017-12-11 22:04:03,529 info 20 INFO E:/Python/Python/模块二/day07/logers.py logers.py logers <module> 32 info
 2017-12-11 22:04:03,529 critical 50 CRITICAL E:/Python/Python/模块二/day07/logers.py logers.py logers <module> 33 critical
 2017-12-11 22:04:03,529 error 40 ERROR E:/Python/Python/模块二/day07/logers.py logers.py logers <module> 34 error
+2017-12-11 22:05:49,687 warning 30 WARNING E:/Python/Python/模块二/day07/logers.py logers.py logers <module> 31 warning
+2017-12-11 22:05:49,688 info 20 INFO E:/Python/Python/模块二/day07/logers.py logers.py logers <module> 32 info
+2017-12-11 22:05:49,688 critical 50 CRITICAL E:/Python/Python/模块二/day07/logers.py logers.py logers <module> 33 critical
+2017-12-11 22:05:49,688 error 40 ERROR E:/Python/Python/模块二/day07/logers.py logers.py logers <module> 34 error
