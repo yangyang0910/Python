@@ -6,5 +6,8 @@
 ## Cart项目具体功能
 ![ATM项目流程图](https://github.com/yangyang0910/Python/blob/master/%E6%A8%A1%E5%9D%97%E4%BA%8C/homework/ATMofCart/imgs/Cart.png?raw=true)
 
-
+## 日志
+- error.log：记录错误日志
+- Finance.log：记录金融方面的操作
+- All.log：所有操作日志记录
 
