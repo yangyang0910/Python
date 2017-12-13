@@ -13,6 +13,7 @@
 
 ## 登录功能
 - 成功则记录session, 否则不作操作
+- 退出登录删除session
 
 
 ## 账户信息表
@@ -25,7 +26,19 @@
     "username" : "root",
     "password" : "root",
     "balance": 5000,
-    "status" : "0(正常)|1(冻结)|2(未知状态)"
+    "status" : "0(正常)|1(冻结)|2(未知状态)",
+    "userstatus" : "0(正常)|1(软删除)",
+    "loginstatus" : "0(正在登录)|1(下线)",
+    "jurisdiction" : "0(超级权限)|1(高级权限)|2(初级权限)"
+  }
+}
+```
+
+- 用户状态表
+```json
+{
+  "root":{
+    "status" : "sessiodId"
   }
 }
 ```
@@ -68,4 +81,14 @@
   }
 }
 
+```
+
+- cookie 记录
+```json
+{
+  "sessionid":"", // sessionID
+  "times" : "", // 有效期
+  "status" : "true|flase",
+  "createtime":"" //创建时间
+}
 ```

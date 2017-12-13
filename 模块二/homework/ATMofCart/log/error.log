@@ -4,3 +4,6 @@
 2017-12-13 12:05:36,119 用户名不存在！ 50 CRITICAL E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 51 用户名不存在！
 2017-12-13 12:05:36,119 用户名不存在！ 30 WARNING E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 52 用户名不存在！
 2017-12-13 12:05:36,119 用户名不存在！ 40 ERROR E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 53 用户名不存在！
+2017-12-13 19:23:19,595 [WinError 183] 当文件已存在时，无法创建该文件。: 'C:\\.cookie'CookiePath创建失败！ 50 CRITICAL E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 51 [WinError 183] 当文件已存在时，无法创建该文件。: 'C:\\.cookie'CookiePath创建失败！
+2017-12-13 19:23:19,598 [WinError 183] 当文件已存在时，无法创建该文件。: 'C:\\.cookie'CookiePath创建失败！ 30 WARNING E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 52 [WinError 183] 当文件已存在时，无法创建该文件。: 'C:\\.cookie'CookiePath创建失败！
+2017-12-13 19:23:19,598 [WinError 183] 当文件已存在时，无法创建该文件。: 'C:\\.cookie'CookiePath创建失败！ 40 ERROR E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 53 [WinError 183] 当文件已存在时，无法创建该文件。: 'C:\\.cookie'CookiePath创建失败！

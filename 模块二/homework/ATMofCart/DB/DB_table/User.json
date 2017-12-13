@@ -4,6 +4,9 @@
     "username" : "root",
     "password" : "root",
     "balance": 5000,
-    "status" : "0(正常)|1(冻结)|2(未知状态)"
+    "status" : 0,
+    "userstatus" : 0,
+    "loginstatus" : 0,
+    "jurisdiction" : 0
   }
 }

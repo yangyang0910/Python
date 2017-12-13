@@ -1,23 +1,36 @@
 # -*- coding:utf-8 -*-
 # AUTHER   @ Alvin
 import json
+import os
 from Logs import Loggs
+from Session import Session
 class Login(object):
 
     def __init__(self):
-        import os
         self.__file_path = os.path.abspath("../DB/DB_table")
+        self.__sep = os.path.sep
 
+    ''' 登录 '''
     def login(self, username, password):
-        with open(self.__file_path + "/User.json", "r") as f:
+        count = False
+        with open(self.__file_path +  self.__sep + "user.json", "r") as f:
+            # print(f.read())
             s = json.loads(f.read())
-            try:
-                name = s[username]
-                Loggs().All("登录成功！")
-                return True
-            except Exception as a:
-                Loggs().Error(str(a) + "用户不存在或密码错误！")
+            if s[username]["password"] == password:
+                count = True
+            else:
                 return False
+        if count:
+            Loggs().All("登录成功！")
+            Session()[username] = username
+            return True
+        else:
+            Loggs().Error("用户不存在或密码错误！")
+            return False
 
-    def loginout(self):
-        pass
+    ''' 注销 '''
+    def loginout(self,username):
+        del Session()[username]
+        return True
+
+
