@@ -1,0 +1,6 @@
+2017-12-13 12:05:36,119 'ass'用户或密码错误！ 50 CRITICAL E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 51 'ass'用户或密码错误！
+2017-12-13 12:05:36,119 'ass'用户或密码错误！ 30 WARNING E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 52 'ass'用户或密码错误！
+2017-12-13 12:05:36,119 'ass'用户或密码错误！ 40 ERROR E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 53 'ass'用户或密码错误！
+2017-12-13 12:05:36,119 用户名不存在！ 50 CRITICAL E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 51 用户名不存在！
+2017-12-13 12:05:36,119 用户名不存在！ 30 WARNING E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 52 用户名不存在！
+2017-12-13 12:05:36,119 用户名不存在！ 40 ERROR E:\Python\Python\模块二\homework\ATMofCart\module\Logs.py Logs.py Logs __write 53 用户名不存在！
