@@ -34,13 +34,37 @@
 ```json
 {
   "123456789":{
-    "userid" : "2015001",
-    "operation" : "取现(0)|还款(1)|转账(2)",
-    "money" : 500,
-    "touser" : "root",
-    "status" : "0(未成功)|1(成功)|2(未知错误)",
-    "createtime" : "1452000000",
-    "updatetime" : "1452000000"
+    "userid" : "2015001", // 用户ID
+    "operation" : "取现(0)|还款(1)|转账(2)", // 操作方式
+    "money" : 500,  // 操作金额
+    "touser" : "root", // 操作对象
+    "status" : "0(操作中)|1(成功)|2(未知错误)", // 操作状态
+    "createdtime" : "1452000000", // 创建时间
+    "updatedtime" : "1452000000"  // 修改时间
+    "deletedtime" : "1452000000"  // 删除时间
+  }
+}
+```
+
+
+- sessionId表
+```json
+{
+  "username" : "sessionID", 
+  "root" : "a371f8775da8d33ada110c2af75a351d782f9da5" 
+}
+```
+
+
+- session记录表
+```json
+{
+  "12f95bb180732f456147270c869934adcd16797d": 
+  {
+    "user": "admin", // 用户名
+    "expiryTime": 3600, // 过期时间
+    "expiry": true, // 是否过期
+    "createTime": 1513154308.3949254 // session创建时间
   }
 }
 ```

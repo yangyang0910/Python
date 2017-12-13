@@ -5,8 +5,9 @@
     "money" : 500,
     "touser" : "root",
     "status" : "0(未成功)|1(成功)|2(未知错误)",
-    "createtime" : "1452000000",
-    "updatetime" : "1452000000"
+    "createdtime" : "1452000000", // 创建时间
+    "updatedtime" : "1452000000", // 修改时间
+    "deletedtime" : "1452000000"  // 删除时间
   }
 }
 
