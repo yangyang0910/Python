@@ -8,7 +8,7 @@ Loddings = logging.getLogger("Loggers")
 Loddings.setLevel(logging.INFO)
 # 生成文件hdler
 hdlr = logging.StreamHandler()
-filt = logging.FileHandler("Loggers.log")
+filt = logging.FileHandler("Logg.log")
 hdlr.setLevel(logging.ERROR)
 filt.setLevel(logging.NOTSET)
 #添加或删除指定的filter

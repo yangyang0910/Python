@@ -24,7 +24,7 @@
 ##### json.loads 将字符串转换为python基本数据类型 列表字典 #####
 import json
 #
-# l = '["nick","jenny","car"]'
+l = '["nick","jenny","car"]'
 # print(l, type(l))
 # l = json.loads(l)
 # print(l, type(l))
