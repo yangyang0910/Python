@@ -68,6 +68,32 @@
 }
 ```
 
+- 商品表
+```json
+{
+  "goodsId" : {
+    "goodsId" : 201525005
+    "goodsName": "goodsName",
+    "goodsParice" : 200,
+    "belongTo" : "root",
+    "status" : "true(正常)|false(冻结)"
+    "goodsType" : "1(实体商品)|2(虚拟商品)",
+    "Stock" : "100|False",
+  }
+}
+```
+
+- Cart
+```json
+{
+  "root":{
+    "goodsId":"",
+    "goodsName":"",
+    "goodsPrice":""
+  }
+}
+```
+
 
 - session记录表
 ```json

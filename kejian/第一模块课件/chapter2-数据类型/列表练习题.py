@@ -70,7 +70,7 @@ while not exit_flag:
         choice = int(choice)
         if choice >= 0 and choice < len(products):
             shopping_cart.append(products[choice])
-            print("Added product %s into shopping cart." %(products[choice]))
+            print("Added product %s into shopping cart.json." %(products[choice]))
         else:
             print("商品不存在")
     elif choice == 'q':

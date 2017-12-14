@@ -117,6 +117,7 @@ class Cookie(object):
                 return json.loads(read)["sessionid"]
             else:
                 return False
+
     ''' 创建Cookie '''
     def __setitem__(self, key, value):
         cookie_path = self.__DwCookiefilePath()

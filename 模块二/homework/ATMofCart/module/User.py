@@ -3,9 +3,11 @@
 import os
 import time
 import random
+import re
 from Tshash import Tshash
 from Session import Session
 from Cookies import Cookie
+from Login import Login
 import json
 
 class User(object):
@@ -14,6 +16,7 @@ class User(object):
     def __init__(self):
         # E:\Python\Python\模块二\homework\ATMofCart\DB_table
         self.__DbPath = os.path.abspath("../DB/DB_table/")
+        self.__DbUserStatusPath = os.path.abspath("../DB/DB_table/userstatus.json")
         self.__DbUserPath = os.path.abspath("../DB/DB_table/user.json")
         self.__sep = os.path.sep
 
@@ -33,7 +36,20 @@ class User(object):
                     datas["userid"] = int(time.strftime("%Y%m%d%H%M%S", time.localtime())) + random.randint(1000,9999)
                     datas["username"] = username
                     datas["password"] = Tshash().Jam_hash(str(password))
-                    datas["balance"] = 5000
+                    while True:
+                        balances = input("初始化金额为：￥5000，是否修改(Y or N)")
+                        if balances == "y" or balances == "Y":
+                            while True:
+                                balanceManey = input("初始化金额：").strip()
+                                if re.search("\d+", balanceManey) != None:
+                                    datas["balance"] = int(balanceManey)
+                                    break
+                                else:
+                                    print("数据不合法！")
+                            break
+                        else:
+                            datas["balance"] = 5000
+                            break
                     datas["status"] = 0
                     datas["userstatus"] = 0
                     datas["loginstatus"] = 1
@@ -46,7 +62,9 @@ class User(object):
     ''' 判断当前用户是否有权限做该操作 '''
     def JurisdictionYroN(self, Jurisdiction = 2):
         num = self.AccesstoJurisdictionUser(self.ObtainUsername())
-        if num == False:
+        if num == 0:
+            return True
+        elif int(num) > 0:
             if int(num) <= int(Jurisdiction):
                 return True
             else:
@@ -150,13 +168,33 @@ class User(object):
         else:
             return False
 
-    ''' 用户登录状态操作 '''
-    def LoginUser(self,user):
+    ''' 获取用户登录状态操作 '''
+    def LoginUser(self):
         login = self.ObtainUsername()
         if login:
             return True
         else:
             return False
+
+    ''' 用户在线状态操作 '''
+    def StatuaUser(self, status=True):
+        if self.LoginUser():
+            read = ""
+            with open(self.__DbUserStatusPath, "r") as f:
+                read = json.loads(f.read())[self.ObtainUsername()]
+            if read["status"] == True:
+                return True
+            else:
+                with open(self.__DbUserStatusPath, "w") as f:
+                    read["status"] = True
+                    read["cookie"] = Tshash().Jam_hash("cookie_sessionid")
+                    json.dump(read, f)
+                    return True
+        else:
+            if self.LoginUser():
+                return True
+            else:
+                return False
 
     ''' 获取用户权限 '''
     def AccesstoJurisdictionUser(self,user):
@@ -170,20 +208,27 @@ class User(object):
     def ObtainUsername(self):
         sessionid = Cookie()["sessionid"]
         if sessionid:
+            Login().UserStatus(Session()[sessionid])
             return Session()[sessionid]
         else:
-            print("未登录！")
-            return False
+            print("请登录！")
+            if Login().getLogin():
+                sessionid = Cookie()["sessionid"]
+                Login().UserStatus(Session()[sessionid])
+                return Session()[sessionid]
+            else:
+                return False
 
     # def cd(self,password):
     #     print(Tshash().Jam_hash(str(password)))
 
 # print(User().ObtainUsername())
-# User().AddUser("admin","root")
+# User().AddUser("egon","root")
 # print(User().AccesstoJurisdictionUser("root"))
 # User().cd("root")
-# User().JurisdictionYroN(2)
+# print(User().JurisdictionYroN(1))
 # User().FrozenUser("admin")
 # User().rFrozenUser("admin")
 # User().ReUser("admin")
+# print(User().StatuaUser())
 
