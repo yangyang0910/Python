@@ -73,37 +73,50 @@ class Cookie(object):
         else:
             return False
 
+    ''' 判断Cookie是否有效 '''
+    def __CookieYrN(self):
+        cookie_path = self.__DwCookiefilePath()
+        reads = ""
+        count = False
+        with open(cookie_path, "r") as f:
+            reads = json.loads(f.read())
+            times = reads["times"]
+            Ttime = os.stat(cookie_path).st_mtime
+            if int(time.time()) - times > Ttime:
+                count = True
+            else:
+                count = False
+        if count:
+            with open(cookie_path, "w") as f:
+                reads["status"] = False
+                json.dump(reads, f)
+                return False
+        else:
+            return True
+
     ''' 获取Cookie '''
     def __getitem__(self, item):
         cookie_path = self.__DwCookiefilePath()
         count = False
+        read = ""
         if cookie_path:
             with open(cookie_path, "r") as f:
                 read = f.read()
                 if read != "" and json.loads(read) != "":
                     if json.loads(read)["cookie"] == self.__MakeCookie(item):
                         if json.loads(read)["status"] == True:
-                            times = json.loads(read)["times"]
-                            Ttime = os.stat(cookie_path).st_mtime
-                            if int(time.time()) - times > Ttime:
-                                count = True
-                            else:
-                                return json.loads(read)["sessionid"]
+                            count = True
                         else:
                             return False
                     else:
                         return False
                 else:
                     return False
-            if count:
-                reads = ""
-                with open(cookie_path, "r") as f:
-                    reads = json.loads(f.read())
-                with open(cookie_path, "w") as f:
-                    reads["status"] = False
-                    json.dump(reads, f)
-                    return False
-
+        if count:
+            if self.__CookieYrN():
+                return json.loads(read)["sessionid"]
+            else:
+                return False
     ''' 创建Cookie '''
     def __setitem__(self, key, value):
         cookie_path = self.__DwCookiefilePath()
@@ -126,6 +139,7 @@ class Cookie(object):
         else:
             return False
 
+    ''' 修改Cookie有效期 '''
     def ExpiryTime(self, cookieid, times=3600):
         cookie_path = self.__DwCookiefilePath()
         if cookie_path:
@@ -139,10 +153,24 @@ class Cookie(object):
                 json.dump(read, f)
                 return True
 
+    ''' 判断当前系统是否存储登录信息并判断是否有效 '''
+    def UserCookieYrN(self):
+        paths = self.__DwCookiefilePath()
+        if os.path.exists(paths):
+            if self.__CookieYrN():
+                return True
+            else:
+                return False
+        else:
+            return False
 
 
+
+# Cookie().UserCookieYrN()
 # Cookie()["sessionid"] = "12f95bb180732f456147270c869934adcd16797d"
 # print(Cookie()["sessionid"])
 # print(Cookie())
 # del Cookie()["sads"]
 # Cookie().ExpiryTime("sessionid",3600)
+
+

@@ -4,6 +4,7 @@ import json
 import os
 from Logs import Loggs
 from Session import Session
+from Cookies import Cookie
 class Login(object):
 
     def __init__(self):
@@ -18,19 +19,18 @@ class Login(object):
             s = json.loads(f.read())
             if s[username]["password"] == password:
                 count = True
+                Loggs().All("登录成功！")
+                Session()[username] = username
+                return True
             else:
+                Loggs().Error("用户不存在或密码错误！")
                 return False
-        if count:
-            Loggs().All("登录成功！")
-            Session()[username] = username
-            return True
-        else:
-            Loggs().Error("用户不存在或密码错误！")
-            return False
 
     ''' 注销 '''
     def loginout(self,username):
+        del Cookie()["sessionid"]
         del Session()[username]
         return True
 
 
+Login().login("root","root")

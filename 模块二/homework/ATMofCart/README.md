@@ -86,9 +86,10 @@
 - cookie 记录
 ```json
 {
-  "sessionid":"", // sessionID
-  "times" : "", // 有效期
-  "status" : "true|flase",
-  "createtime":"" //创建时间
+    "cookie": "cookieId", 
+    "sessionid": "sessionId", 
+    "times": 3600, // 有效期 
+    "status": "true|flase", // 状态
+    "createtime": 1513167260.2514932 // 创建时间
 }
 ```
