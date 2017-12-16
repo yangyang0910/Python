@@ -4,10 +4,10 @@ import os
 import time
 import random
 import re
-from Tshash import Tshash
-from Session import Session
-from Cookies import Cookie
-from Login import Login
+from module.Tshash import Tshash
+from module.Session import Session
+from module.Cookies import Cookie
+from module.Login import Login
 import json
 
 class User(object):
@@ -15,9 +15,9 @@ class User(object):
 
     def __init__(self):
         # E:\Python\Python\模块二\homework\ATMofCart\DB_table
-        self.__DbPath = os.path.abspath("../DB/DB_table/")
-        self.__DbUserStatusPath = os.path.abspath("../DB/DB_table/userstatus.json")
-        self.__DbUserPath = os.path.abspath("../DB/DB_table/user.json")
+        self.__DbPath = os.path.abspath("DB/DB_table/")
+        self.__DbUserStatusPath = os.path.abspath("DB/DB_table/userstatus.json")
+        self.__DbUserPath = os.path.abspath("DB/DB_table/user.json")
         self.__sep = os.path.sep
 
     ''' 添加用户 '''
@@ -113,8 +113,10 @@ class User(object):
         if self.JurisdictionYroN(1):
             if username == "root" and self.ObtainUsername() == "root":
                 self.__MakeUser(username, password, balance, status,userstatus, loginstatus,jurisdiction)
+                return True
             elif username != None:
                 self.__MakeUser(username, password, balance, status,userstatus, loginstatus,jurisdiction)
+                return True
             else:
                 print("无权限操作！")
                 return False
@@ -219,8 +221,19 @@ class User(object):
             else:
                 return False
 
-    # def cd(self,password):
-    #     print(Tshash().Jam_hash(str(password)))
+    ''' 获取所有用户 '''
+    def GetUserAll(self, status = "userstatus",  userstatus = 0):
+        user = self.ObtainUsername()
+        if user:
+            uses = []
+            with open(self.__DbUserPath, "r") as f:
+                read = json.loads(f.read())
+            for i in read:
+                if user != i:
+                    if int(read[i][status]) == int(userstatus):
+                        uses.append(i)
+            return uses
+
 
 # print(User().ObtainUsername())
 # User().AddUser("egon","root")

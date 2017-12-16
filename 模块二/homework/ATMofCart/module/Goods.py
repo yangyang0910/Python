@@ -4,13 +4,13 @@ import os
 import json
 import time
 import random
-from User import User
+from module.User import User
 import re
 class Goods(object):
 
     def __init__(self):
         self.__sep = os.path.sep
-        self.__Goods = os.path.abspath("../DB/DB_table/goods.json")
+        self.__Goods = os.path.abspath("DB/DB_table/goods.json")
 
     ''' 添加商品 '''
     def AddGoods(self):
@@ -38,11 +38,13 @@ class Goods(object):
     ''' 商品信息录入 '''
     def __GoodsInformation(self, gName=False, gParice=False,gbelongTo=False,gstatus=False,gType=False):
         information = {}
+        count = "您添加的商品如下："
         if gName:
             while True:
                 goodsName = input("商品名称：").strip()
                 if self.InterfaceInput(goodsName, "\W+"):
                     information["goodsName"] = goodsName
+                    count += "商品名称：" + goodsName + "，"
                     break
                 else:
                     print("非法商品名称！")
@@ -51,6 +53,7 @@ class Goods(object):
                 goodsParice = input("商品价格：").strip()
                 if self.InterfaceInput(goodsParice, "\D+"):
                     information["goodsParice"] = goodsParice
+                    count += "商品价格：" + goodsParice + "，"
                     break
                 else:
                     print("非法商品价格！")
@@ -59,6 +62,7 @@ class Goods(object):
                 belongTo = input("商家：").strip()
                 if self.InterfaceInput(belongTo, "\W+"):
                     information["belongTo"] = belongTo
+                    count += "商家：" + belongTo + "，"
                     break
                 else:
                     print("非法商品名称！")
@@ -68,9 +72,11 @@ class Goods(object):
                 if not self.InterfaceInput(status, "Y|N|y|n"):
                     if status == "Y" or status == "y":
                         information["status"] = True
+                        count += "上架，"
                         break
                     else:
                         information["status"] = False
+                        count += "下架，"
                         break
                 else:
                     print("非法商品上架信息(Y|N|y|n)！")
@@ -81,6 +87,10 @@ class Goods(object):
                 if not self.InterfaceInput(goodsType, "\d+"):
                     if int(goodsType) == 1 or int(goodsType) == 2:
                         information["goodsType"] = goodsType
+                        if int(goodsType)==1:
+                            count += "实体商品，"
+                        else:
+                            count += "虚拟商品，"
                         break
                     else:
                         print("非法商品类型！(1 or 2)")
@@ -91,20 +101,21 @@ class Goods(object):
                     Stock = input("库存：").strip()
                     if self.InterfaceInput(Stock, "\D+"):
                         information["Stock"] = Stock
+
                         break
                     else:
                         print("非法商品库存！")
                 else:
-                    Stock = False
-                    information["Stock"] = Stock
+                    information["Stock"] = False
                     break
+                count += "库存为：" + Stock
 
-
+        print(count)
         return information
 
-    ''' 输入接口 '''
+    ''' 正则输入接口 '''
     def InterfaceInput(self, content, res):
-        if re.search(res, content) == None:
+        if not re.search(res, content):
             return True
         else:
             return False
@@ -129,7 +140,7 @@ class Goods(object):
 
     ''' 下架商品 '''
     def GoodsoffShelves(self, goods_id):
-        information = {"status": False}
+        information = {"goodsStatus": False}
         if self.__GoodsStatus(goods_id, information):
             return True
         else:
@@ -137,7 +148,7 @@ class Goods(object):
 
     ''' 上架商品 '''
     def GoodsOnShelves(self, goods_id):
-        information = {"status": True}
+        information = {"goodsStatus": True}
         if self.__GoodsStatus(goods_id, information):
             return True
         else:
@@ -145,18 +156,26 @@ class Goods(object):
 
     ''' 冻结商品 '''
     def FrozenGoods(self, goods_id):
-        information = {"goodsStatus": False}
-        if self.__GoodsStatus(goods_id, information):
-            return True
+        if self.getUserJurisdictionYorN(0):
+            information = {"status": False}
+            if self.__GoodsStatus(goods_id, information):
+                return True
+            else:
+                return False
         else:
+            print("无权此操作")
             return False
 
     ''' 解冻商品 '''
     def rFrozenGoods(self, goods_id):
-        information = {"goodsStatus": True}
-        if self.__GoodsStatus(goods_id, information):
-            return True
+        if self.getUserJurisdictionYorN(0):
+            information = {"status": True}
+            if self.__GoodsStatus(goods_id, information):
+                return True
+            else:
+                return False
         else:
+            print("无权此操作")
             return False
 
     ''' 商品状态操作 '''
@@ -206,7 +225,6 @@ class Goods(object):
         elif Jurisdiction == "0":
             return True
 
-
     ''' 判断当前操作商品是否属于您当前用户 '''
     def __MakeGoodsBelongUser(self, goods_id):
         read = self.__ReadAttributesGoods()
@@ -215,10 +233,34 @@ class Goods(object):
         else:
             return False
 
+    ''' 返回所有商品基本信息 '''
+    def GetGoodsInformation(self):
+        goods = self.__ReadAttributesGoods()
+        information = {}
 
+        for i in goods.values():
+            information[i["goodsId"]] = {}
+            information[i["goodsId"]]["goodsName"] = i["goodsName"]
+            information[i["goodsId"]]["belongTo"] = i["belongTo"]
+        return information
 
+    ''' 返回当前用户的信息 '''
+    def GetGoodsUserInformation(self):
+        goods = self.__ReadAttributesGoods()
+        information = {}
+        user = self.GetUser()
+        for i in goods.values():
+            if i["belongTo"] == user:
+                information[i["goodsId"]] = {}
+                information[i["goodsId"]]["goodsName"] = i["goodsName"]
+                information[i["goodsId"]]["status"] = i["status"]
+                information[i["goodsId"]]["goodsStatus"] = i["goodsStatus"]
+        return information
 
+# print(goods.GetGoodsInformation())
 # print(Goods().MakeGoodsBelongUser("20171292722236"))
 
 
 # print(Goods().GoodsOnShelves("20171292722236"))
+
+

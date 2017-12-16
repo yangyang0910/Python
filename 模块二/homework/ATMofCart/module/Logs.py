@@ -12,7 +12,7 @@ class Loggs(object):
         logging.warning('And this, too')
     '''
     def __init__(self):
-        self.__logpath = os.path.abspath("../") + "/log/"
+        self.__logpath = os.path.abspath("") + "/log/"
         # 实例化log对象
         self.__ch = logging.getLogger("log")
         # 全局设置记录日志级别

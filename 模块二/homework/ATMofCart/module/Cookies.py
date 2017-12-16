@@ -4,8 +4,8 @@
 import os
 import json
 import time
-from Logs import Loggs
-from Tshash import Tshash
+from module.Logs import Loggs
+from module.Tshash import Tshash
 
 class Cookie(object):
     ''' Cookie操作 '''

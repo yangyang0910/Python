@@ -47,11 +47,13 @@
 ```json
 {
   "123456789":{
-    "userid" : "2015001", // 用户ID
-    "operation" : "取现(0)|还款(1)|转账(2)", // 操作方式
+    "user" : "root", // 用户ID
+    "operation" : "取现(0)|还款(1)|转账(2)|购买(3)", // 操作方式
     "money" : 500,  // 操作金额
     "touser" : "root", // 操作对象
     "status" : "0(操作中)|1(成功)|2(未知错误)", // 操作状态
+    "rate" : 0.0001,
+    "remarks" : "备注",
     "createdtime" : "1452000000", // 创建时间
     "updatedtime" : "1452000000"  // 修改时间
     "deletedtime" : "1452000000"  // 删除时间
@@ -76,9 +78,10 @@
     "goodsName": "goodsName",
     "goodsParice" : 200,
     "belongTo" : "root",
-    "status" : "true(正常)|false(冻结)"
+    "status" : "true(正常)|false(冻结)",
     "goodsType" : "1(实体商品)|2(虚拟商品)",
-    "Stock" : "100|False",
+    "goodsStatus" : "(true)是(flase)否下架",
+    "Stock" : "100|False"
   }
 }
 ```
@@ -86,12 +89,16 @@
 - Cart
 ```json
 {
-  "root":{
-    "goodsId":"",
-    "goodsName":"",
-    "goodsPrice":""
+  "Alvin": {
+    "20171225247617": {
+      "goodsName": "\u7535\u89c6", 
+      "goodsId": 20171225247617, 
+      "goodsNum": 3, 
+      "goodsParice": "2000", 
+      "createTime": 1513313432.6622658
+      }
+    }
   }
-}
 ```
 
 

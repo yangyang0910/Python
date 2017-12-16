@@ -4,16 +4,16 @@ import json
 import os
 import re
 import getpass
-from Logs import Loggs
-from Session import Session
-from Cookies import Cookie
-from Tshash import Tshash
+from module.Logs import Loggs
+from module.Session import Session
+from module.Cookies import Cookie
+from module.Tshash import Tshash
 class Login(object):
 
     def __init__(self):
-        self.__file_path = os.path.abspath("../DB/DB_table")
+        self.__file_path = os.path.abspath("DB/DB_table")
         self.__sep = os.path.sep
-        self.__DbUserStatusPath = os.path.abspath("../DB/DB_table/userstatus.json")
+        self.__DbUserStatusPath = os.path.abspath("DB/DB_table/userstatus.json")
 
     ''' 登录 '''
     def __login(self, username, password):

@@ -5,13 +5,13 @@ import os
 import time
 import hashlib
 import json
-from Cookies import Cookie
+from module.Cookies import Cookie
 
 class Session(object):
     ''' session '''
     def __init__(self):
-        self.__sessionPath = os.path.abspath("../DB/DB_session")
-        self.__sessionIDPath = os.path.abspath("../DB/DB_table")
+        self.__sessionPath = os.path.abspath("DB/DB_session")
+        self.__sessionIDPath = os.path.abspath("DB/DB_table")
         self.__sep = os.path.sep
 
     '''制作session的ID'''
@@ -35,20 +35,22 @@ class Session(object):
             else:
                 return False
         count = False
-        with open(self.__sessionPath + self.__sep + "session_" + item + ".json", "r") as f:
-            jsonMake = json.loads(f.read())
-            jsonMakes = jsonMake[username]
-            expiryTime = jsonMakes["expiryTime"]
-            if jsonMakes["expiry"]:
-                Times = time.time() - int(expiryTime)
-                mTimes = os.stat(self.__sessionPath + self.__sep + "session_" + item + ".json").st_mtime
-                if int(Times) > int(mTimes):
-                    count = True
+        try:
+            with open(self.__sessionPath + self.__sep + "session_" + item + ".json", "r") as f:
+                jsonMake = json.loads(f.read())
+                jsonMakes = jsonMake[username]
+                expiryTime = jsonMakes["expiryTime"]
+                if jsonMakes["expiry"]:
+                    Times = time.time() - int(expiryTime)
+                    mTimes = os.stat(self.__sessionPath + self.__sep + "session_" + item + ".json").st_mtime
+                    if int(Times) > int(mTimes):
+                        count = True
+                    else:
+                        return jsonMakes["user"]
                 else:
-                    return jsonMakes["user"]
-            else:
-                return False
-
+                    return False
+        except Exception as e:
+            del Cookie()["sessionid"]
         if count:
             with open(self.__sessionPath + "\\\\session_" + item + ".json", "w") as f:
                 jsonMakes["expiry"] = False
