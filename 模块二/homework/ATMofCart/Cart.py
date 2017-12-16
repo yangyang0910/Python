@@ -133,7 +133,7 @@ def main():
                     break
             elif str(content) == "2":
                 contents = input(
-                    "[1]：查看余额，[2]：还款，[3]：转账，[4]：修改用户账户余额，[5]：订单查询，[6]：删除用户,[7]:软删除用户，[8]：恢复用户，[9]：冻结用户,[10]：解冻用户").strip()
+                    "[1]：查看余额，[2]：还款，[3]：转账，[4]：修改用户账户余额，[5]：订单查询，[6]：删除用户,[7]:软删除用户，[8]：恢复用户，[9]：冻结用户,[10]：解冻用户，[11]：添加用户").strip()
                 if contents == "q" or contents == "Q":
                     break
                 if str(contents) == "1":
@@ -296,6 +296,20 @@ def main():
                                 print("输入用户不存在！")
                         else:
                             print("无用户需要此操作")
+                    else:
+                        print("无权操作")
+                elif str(contents) == "11":
+                    user = User().ObtainUsername()
+                    if user and user == "root":
+                        username = input("Username:").strip()
+                        password = input("Password:").strip()
+                        if re.search("\w+", username) and re.search("\w+", password):
+                            if User().AddUser(username, password):
+                                print("添加成功")
+                            else:
+                                print("添加失败")
+                        else:
+                            print("用户名或密码不合法")
                     else:
                         print("无权操作")
             elif str(content) == "3":
