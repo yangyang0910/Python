@@ -28,9 +28,11 @@ class Login(object):
                     Session()[username] = username
                     # 修改用户状态
                     self.UserStatus(username, status=True)
+                    print("登录成功！")
                     return True
                 else:
                     Loggs().Error("用户不存在或密码错误！")
+                    print("用户名或密码不正确！")
                     return False
             else:
                 print("非法用户！！！")
@@ -58,6 +60,7 @@ class Login(object):
 
     ''' 登录，注册接口 '''
     def getLogin(self):
+        # print("")
         username = input("用户名：").strip()
         password = input("密码：").strip()
         if re.search("\W+", password) == None and re.search("\W+", username) == None:

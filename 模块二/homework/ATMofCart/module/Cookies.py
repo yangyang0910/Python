@@ -36,11 +36,10 @@ class Cookie(object):
                     return True
                 except Exception as e:
                     Loggs().Error(str(e) + "CookiePath创建失败！")
-
                     return False
             return True
         elif self.__GenreSystem == "posix":
-            paths = "/usr/cookie"
+            paths = "/User/cookiess"
             if not self.__DwFolder(paths):
                 try:
                     os.makedirs(paths)
@@ -54,7 +53,7 @@ class Cookie(object):
     ''' 获取当前系统Cookie文件夹路径 '''
     def __DwCookiePath(self):
         Wpaths = "C:\\.cookie"
-        Mpaths = "/usr/cookie"
+        Mpaths = "/User/cookiess"
         if self.__GenreSystem == "nt" and self.__DwFolder(Wpaths):
             return Wpaths
         elif self.__GenreSystem == "posix" and not self.__DwFolder(Mpaths):
@@ -67,6 +66,9 @@ class Cookie(object):
         paths = self.__DwCookiePath()
         if paths:
             if self.__GenreSystem == "nt":
+                if not os.path.exists(paths + "\cookie.json"):
+                    with open(paths + "\cookie.json", "w") as f:
+                        pass
                 return paths + "\cookie.json"
             else:
                 return paths + "/cookie.json"

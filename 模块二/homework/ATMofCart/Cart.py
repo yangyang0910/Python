@@ -8,7 +8,7 @@ from module.Order import Order
 from module.User import User
 def main():
     while True:
-        content = input("What are you going to do([1]Shopping 、[2]ATM or [3]Goods)?").strip()
+        content = input("What are you going to do([1]Shopping 、[2]ATM(User) or [3]Goods)?").strip()
         while True:
             if str(content) == "1":
                 contents = input(
@@ -142,11 +142,13 @@ def main():
                     if user:
                         print("余额：%s" % (float(Order().ObtainBalance(user))))
                 elif str(contents) == "2":
-                    menoy = input("menoy：").strip()
-                    if re.search("\d+", menoy):
-                        Order().Repayment(float(menoy))
-                    else:
-                        print("您输入的数据不合法")
+                    user = User().ObtainUsername()
+                    if user:
+                        menoy = input("menoy：").strip()
+                        if re.search("\d+", menoy):
+                            Order().Repayment(float(menoy))
+                        else:
+                            print("您输入的数据不合法")
                 elif str(contents) == "3":
                     user = User().ObtainUsername()
                     if user:
@@ -300,18 +302,19 @@ def main():
                         print("无权操作")
                 elif str(contents) == "11":
                     user = User().ObtainUsername()
-                    if user and user == "root":
-                        username = input("Username:").strip()
-                        password = input("Password:").strip()
-                        if re.search("\w+", username) and re.search("\w+", password):
-                            if User().AddUser(username, password):
-                                print("添加成功")
+                    if user:
+                        if user == "root":
+                            username = input("Username:").strip()
+                            password = input("Password:").strip()
+                            if re.search("\w+", username) and re.search("\w+", password):
+                                if User().AddUser(username, password):
+                                    print("添加成功")
+                                else:
+                                    print("添加失败")
                             else:
-                                print("添加失败")
+                                print("用户名或密码不合法")
                         else:
-                            print("用户名或密码不合法")
-                    else:
-                        print("无权操作")
+                            print("无权操作")
             elif str(content) == "3":
                 contents = input(
                     "[1]：添加商品，[2]：删除商品，[3]：下架商品，[4]：上架商品，[5]：冻结商品，[6]：解冻商品").strip()
