@@ -107,6 +107,16 @@ achievement表
 }
 ```
 
+初始化账户
+```json
+{
+  "管理员" : {"Username":"root", "Password" : "root"},
+  "教师" : {"Username": "Mosson", "Password" : "root"},
+  "学员" : {"Username" : "Alvin" , "Password" : "root"}
+}
+
+```
+
 
 
 
