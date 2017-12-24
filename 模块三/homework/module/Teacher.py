@@ -208,6 +208,7 @@ class Teachers(object):
                             break
                     with open(self.__DB_Achievement, "wb") as f:
                         pickle.dump(aread, f)
+                        print("修改成功")
                         return True
 
                 else:
@@ -218,3 +219,6 @@ class Teachers(object):
 # Teachers().CatStudent()
 # Teachers().CatCourse()
 # Teachers().midifyAchievement()
+
+
+# Teachers().LookAchievement()

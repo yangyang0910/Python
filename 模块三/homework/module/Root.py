@@ -1,11 +1,17 @@
 # -*- coding:utf-8 -*-
 # AUTHER   @ Alvin
-
+from Teacher import Teachers
+from Student import Students
 class RootView:
 
     def __init__(self):
         pass
 
+    def FormatTeacher(self):
+        Teachers().setTeacher()
+
+    def setStudent(self):
+        Students().setStudent()
     ''' 创建老师 '''
     ''' 修改老师 '''
     ''' 删除老师 '''

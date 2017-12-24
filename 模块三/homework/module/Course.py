@@ -53,16 +53,11 @@ class Course(object):
                     pickle.dump(read, f)
                     return True
 
-    ''' 修改课程 '''
-    def ResiveCourse(self):
-        if self.getRole():
-            pass
-
     ''' 获取课程 '''
     def getCourse(self):
-        if self.getRole():
-            with open(self.__DB_Course, "rb") as f:
-                return pickle.loads(f.read())
+        # if self.getRole():
+        with open(self.__DB_Course, "rb") as f:
+            return pickle.loads(f.read())
 
     ''' 格式化课程 '''
     def getCourseName(self, read):

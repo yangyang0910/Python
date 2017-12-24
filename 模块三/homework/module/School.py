@@ -8,23 +8,27 @@ class School(object):
         self.__DB_School = os.path.abspath("../DB/School")
 
     ''' 创建学校 '''
-    def CreateSchool(self, name):
+    def CreateSchool(self):
+        name = input("校区名称>>>:")
         if Common().Write_Withs(self.__DB_School,name):
             print("创建成功")
+            return True
         else:
             print("创建失败")
+            return False
 
     ''' 获取所有的学校 '''
     def ReadSchool(self, add="北京校区"):
         return Common().Read_Withs(self.__DB_School)
 
+    ''' 打印所有学校 '''
+    def getReadSchool(self):
+        for i in self.ReadSchool():
+            print(self.ReadSchool()[i]["name"])
+
     ''' 获取学校 '''
     def getSchoolName(self, schoolid):
         return self.ReadSchool()[schoolid]["name"]
-
-    ''' 课程管理 '''
-    def CourseAdministration(self):
-        pass
 
     ''' 判断学校是否存在 '''
     def getSchool(self, schoolid):
@@ -42,5 +46,5 @@ class School(object):
 # print(School().getSchoolName("2ae741a3e8ed090faec3cf75e7d834481c0fca89"))
 # print(School().getSchool("2ae741a3e8ed090faec3cf75e7d834481c0fca89"))
 # print(School().ReadSchool())
-
+# School().getReadSchool()
 

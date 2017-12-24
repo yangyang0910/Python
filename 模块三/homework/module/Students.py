@@ -15,6 +15,7 @@ class Students(object):
         self.__DB_Course = os.path.abspath("../DB/Course")
         self.__DB_School = os.path.abspath("../DB/School")
         self.__DB_Order = os.path.abspath("../DB/Order")
+        self.__DB_Achievement = os.path.abspath("../DB/Achievement")
 
     ''' 购买课程 '''
     def PurchaseCourse(self):
@@ -46,20 +47,35 @@ class Students(object):
 
     ''' 课程查询 '''
     def getCourse(self):
-        with open(self.__DB_Course, "rb") as f:
-            if os.path.getsize(self.__DB_Course) == 0:
-                read = {}
-            else:
-                read = pickle.loads(f.read())
-        with open(self.__DB_School, "rb") as f:
-            if os.path.getsize(self.__DB_Student) == 0:
-                reads = {}
-            else:
-                reads = eval(pickle.loads(f.read()))
-        for i in read:
-            for a in reads:
-                if reads[a]["id"] == read[i]["school"]:
-                    print("课程名称："+i, "价格：" + read[i]["price"], "校区：" + reads[a]["name"], "开学日期：" + read[i]["DateofSchool"])
+        if Users().JudgeLogin():
+            if self.getUser(Users().CookieSession("sessionid")):
+                with open(self.__DB_Course, "rb") as f:
+                    if os.path.getsize(self.__DB_Course) == 0:
+                        read = {}
+                    else:
+                        read = pickle.loads(f.read())
+                with open(self.__DB_School, "rb") as f:
+                    if os.path.getsize(self.__DB_Student) == 0:
+                        reads = {}
+                    else:
+                        reads = eval(pickle.loads(f.read()))
+                for i in read:
+                    for a in reads:
+                        if reads[a]["id"] == read[i]["school"]:
+                            print("课程名称："+i, "价格：" + read[i]["price"], "校区：" + reads[a]["name"], "开学日期：" + read[i]["DateofSchool"])
+
+    ''' 已购买课程 '''
+    def setBuyCourse(self):
+        if Users().JudgeLogin():
+            if self.getUser(Users().CookieSession("sessionid")):
+                with open(self.__DB_Order, "rb") as f:
+                    if os.path.abspath(self.__DB_Order) == 0:
+                        read = {}
+                    else:
+                        read = pickle.loads(f.read())
+                for i in read:
+                    if read[i]["name"] == Users().CookieSession("sessionid"):
+                        print("课程名称：" + read[i]["course"])
 
     ''' 获取学员余额 '''
     def getMoney(self):
@@ -128,4 +144,26 @@ class Students(object):
 
 # Students().setStudent("Alvin")
 # print(Students().getMoney())
-Students().PurchaseCourse()
+# Students().PurchaseCourse()
+
+    ''' 查看成绩 '''
+    def LookAchievement(self):
+        if Users().JudgeLogin():
+            student = Users().CookieSession("sessionid")
+            with open(self.__DB_Student, "rb") as f:
+                if os.path.getsize(self.__DB_Student) == 0:
+                    read = {}
+                else:
+                    read = pickle.loads(f.read())
+            if student in read:
+                with open(self.__DB_Achievement, "rb") as f:
+                    if os.path.getsize(self.__DB_Achievement) == 0:
+                        aread = {}
+                    else:
+                        aread = pickle.loads(f.read())
+                for i in aread:
+                    if i == student:
+                        print("目前" + aread[i]["course"] + "学科成绩：", aread[i]["achievement"])
+
+# Students().setBuyCourse()
+# Students().LookAchievement()

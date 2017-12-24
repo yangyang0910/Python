@@ -8,6 +8,7 @@ class StuClass:
 
     def __init__(self):
         self.__DB_STU = os.path.abspath("../DB/StuClass")
+        self.__DB_School = os.path.abspath("../DB/School")
 
     ''' 过滤创建 '''
     def setClass(self):
@@ -73,11 +74,21 @@ class StuClass:
         if os.path.getsize(self.__DB_STU) != 0:
             with open(self.__DB_STU, "rb") as f:
                 return pickle.loads(f.read())
-
+    ''' 打印所有班级 '''
+    def getReadStuClass(self):
+        with open(self.__DB_School, "rb") as f:
+            if os.path.getsize(self.__DB_School) == 0:
+                read = {}
+            else:
+                read = eval(pickle.loads(f.read()))
+        for i in self.ReadStuClass():
+            for a in read:
+                if a == self.ReadStuClass()[i]["school"]:
+                    print("班级名称：" + i, "，所属校区：" + read[a]["name"])
 # StuClass().getTeacher("dc76e9f0c0006e8f919e0c515c66dbba3982f785")
 # print(StuClass().JudgeSchool("2ae741a3e8ed090faec3cf75e7d834481c0fca89"))
 
 # print(StuClass().ReadStuClass())
 # StuClass().setClass()
-
+# StuClass().getReadStuClass()
 
