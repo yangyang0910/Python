@@ -88,3 +88,11 @@ class Users:
 # print(Users().CookieSession("sessionid"))
 # Users().Register("Mosson", "root", "Teacher")
 # print(Users().getRole())
+
+    ''' 获取USER '''
+    def getUser(self):
+        with open(self.__DB_User, "rb") as f:
+            if os.path.getsize(self.__DB_User) != 0:
+                return pickle.loads(f.read())
+            else:
+                return False

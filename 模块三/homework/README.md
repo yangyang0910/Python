@@ -18,7 +18,7 @@ Student表
     "username" : "Alvin",
     "school" : "2ae741a3e8ed090faec3cf75e7d834481c0fca89",
     "class" : "2ae741a3e8ed090faec3cf75e7d834481c0fca89",
-    "course" : "2ae741a3e8ed090faec3cf75e7d834481c0fca89"
+    "money" : ""
   }
 }
 ```
@@ -84,3 +84,30 @@ Course 表
   }
 }
 ```
+
+Order表
+```json
+{
+  "2ae741a3e8ed090faec3cf75e7d834481c0fca89" : {
+    "name" : "Alvin",
+    "course" : "go",
+    "price" : "",
+    "createTime" : ""
+  }
+}
+```
+
+achievement表
+```json
+{
+  "Alvin":{
+    "achievement" : "",
+    "course" : ""
+  }
+}
+```
+
+
+
+
+

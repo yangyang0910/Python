@@ -12,9 +12,9 @@ class StuClass:
     ''' 过滤创建 '''
     def setClass(self):
         schoolName = School().ReadSchool()
+        name = input("Class Name：").strip()
         for i in schoolName:
             print(i, "：" + str(schoolName[i]["name"]))
-        name = input("Class Name：").strip()
         school = input("School ID：").strip()
         if self.CreateClass(name, school):
             print(name,"：创建成功！")
@@ -78,5 +78,6 @@ class StuClass:
 # print(StuClass().JudgeSchool("2ae741a3e8ed090faec3cf75e7d834481c0fca89"))
 
 # print(StuClass().ReadStuClass())
+# StuClass().setClass()
 
 

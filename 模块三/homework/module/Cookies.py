@@ -80,7 +80,6 @@ class Cookie(object):
             with open(paths+self.__sep+"cookie.json", "rb") as f:
                 read = pickle.loads(f.read())
                 if item in read:
-
                     return read[item]
                 else:
                     return False

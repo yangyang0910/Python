@@ -18,8 +18,18 @@ class Course(object):
         for i in School().ReadSchool():
             print("ID:" + i,"：" + School().ReadSchool()[i]["name"])
         school = input("School ID:").strip()
-        for i in StuClass().ReadStuClass():
-            print("Name:",i)
+        if not School().getSchool(school):
+            print("DDD")
+            return False
+        count = True
+        schools = StuClass().ReadStuClass()
+        for i in schools:
+            if schools[i]["school"] == school:
+                count = False
+                print(i)
+        if count:
+            print("该校区还没符合条件的班级！")
+            return False
         stuclass = input("StuClass:").strip()
         if self.CreateCourse(name, DateofSchool, cycle, price, school, stuclass):
             print("创建成功！")
